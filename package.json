@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "express": "^4.18.0"
+  },
+  "name": "project_4_backend",
+  "description": "## Our Solution",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/the-observer07/Project_4_Backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/the-observer07/Project_4_Backend/issues"
+  },
+  "homepage": "https://github.com/the-observer07/Project_4_Backend#readme"
+}
