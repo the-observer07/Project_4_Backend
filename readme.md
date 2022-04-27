@@ -14,7 +14,6 @@ This is a MERN stack app that is deployed to Heroku and Netlify, and uses MongoD
 | User signup                              | POST      |
 | User logout                              | GET       |
 | Authenticate user (protect React routes) | GET       |
-| User signup                              | POST      |
 | Display favorites                        | GET       |
 | Add to portfolio                         | POST      |
 | Update to portfolio                      | PATCH     |
