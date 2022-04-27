@@ -1,16 +1,26 @@
-const bcrypt = require("bcrypt");
-const router = require("./food");
 const Watchlist = require("../models/Watchlist");
-// const userflow = require("../controllers/user");
-const catchAsync = require("../middleware/errorHandler");
-const jwtAuth = require("../middleware/jwtAuth");
+const express = require("express");
+const router = express.Router();
 
-router.get("/", jwtAuth, catchAsync(userflow.getuser));
-router.post("/signup", catchAsync(userflow.signup));
-router.post("/login", catchAsync(userflow.login));
-router.get("/logout", catchAsync(userflow.logout));
+router.post("/newwatch", async (req, res) => {
+    try {
+        const createdWatch = await Watchlist.create(req.body);
+        console.log("Added to watchlist", createdWatch);
+        res.json({ status: "ok", message: "Added to watchlist" });
+    } catch (error) {
+        console.log(error);
+    }
+});
 
-//// SEEDING USERS
-router.get("/seed/seedAll", userflow.seedAll);
+router.delete("/removewatch", async (req, res) => {
+    try {
+        const { token } = req.body;
+        const removedWatch = await Watchlist.deleteOne({ token });
+        console.log("Removed from watchlist", removedWatch);
+        res.json({ status: "ok", message: "Removed from watchlist" });
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 module.exports = router;

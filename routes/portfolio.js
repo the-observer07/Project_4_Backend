@@ -1,13 +1,37 @@
-const bcrypt = require("bcrypt");
-const router = require("./food");
 const Portfolio = require("../models/Portfolio");
-// const userflow = require("../controllers/user");
-const catchAsync = require("../middleware/errorHandler");
-const jwtAuth = require("../middleware/jwtAuth");
+const express = require("express");
+const router = express.Router();
 
-router.get("/", jwtAuth, catchAsync(userflow.getuser));
-router.post("/signup", catchAsync(userflow.signup));
-router.post("/login", catchAsync(userflow.login));
-router.get("/logout", catchAsync(userflow.logout));
+router.post("/newentry", async (req, res) => {
+    try {
+        const createdEntry = await Portfolio.create(req.body);
+        console.log("portfolio entry recorded", createdEntry);
+        res.json({ status: "ok", message: "entry created" });
+    } catch (error) {
+        console.log(error);
+        // res.status(401).json(usernameOrPasswordError);
+    }
+});
+
+router.patch("/entryupdate", async (req, res) => {
+    try {
+        const editedEntry = await Portfolio.findOne(req.body);
+        console.log(editedEntry);
+        res.json({ status: "ok", message: "entry edited" });
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+router.delete("/removeentry", async (req, res) => {
+    const { token } = req.body;
+    const message = await Portfolio.deleteOne({ token });
+
+    if (message.deletedCount === 1) {
+        res.json({ status: "ok", message: "entry deleted" });
+    } else {
+        res.json({ status: "error", message: "problems with deleting entry" });
+    }
+});
 
 module.exports = router;

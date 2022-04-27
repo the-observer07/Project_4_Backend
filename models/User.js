@@ -16,10 +16,6 @@ const userSchema = new Schema(
             type: String,
             required: [true, "Password is required."],
         },
-        reviews: {
-            type: [Schema.Types.ObjectId],
-            ref: "Review",
-        },
     },
     { timestamps: true }
 );
