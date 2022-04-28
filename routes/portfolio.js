@@ -38,15 +38,17 @@ router.patch("/entryupdate", async (req, res) => {
     }
 });
 
-router.delete("/removeentry", async (req, res) => {
-    const { token } = req.body;
-    const message = await Portfolio.deleteOne({ token });
+router.post("/removeentry", async (req, res) => {
+    // const deleteEntry = await Portfolio.deleteOne(req.body);
+    console.log(JSON.stringify(req.body));
+    // const { token } = req.body;
+    // const message = await Portfolio.deleteOne({ token });
 
-    if (message.deletedCount === 1) {
-        res.json({ status: "ok", message: "entry deleted" });
-    } else {
-        res.json({ status: "error", message: "problems with deleting entry" });
-    }
+    // if (message.deletedCount === 1) {
+    //     res.json({ status: "ok", message: "entry deleted" });
+    // } else {
+    //     res.json({ status: "error", message: "problems with deleting entry" });
+    // }
 });
 
 module.exports = router;
