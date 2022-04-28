@@ -3,17 +3,17 @@ const Schema = mongoose.Schema;
 
 const portfolioSchema = new Schema(
     {
-        id: {
+        token: {
             type: String,
-            required: [true, "Token is required."],
+            required: true,
         },
         price: {
             type: Number,
-            required: [true, "Price is required."],
+            required: true,
         },
         quantity: {
             type: Number,
-            required: [true, "Quantity is required."],
+            required: true,
         },
     },
     { timestamps: true }

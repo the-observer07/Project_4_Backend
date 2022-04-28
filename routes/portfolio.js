@@ -2,6 +2,21 @@ const Portfolio = require("../models/Portfolio");
 const express = require("express");
 const router = express.Router();
 
+router.get("/pull", async (req, res) => {
+    try {
+        const data = await Portfolio.find({});
+        // .limit(10)
+        // .sort({ updatedAt: -1 })
+        // .populate("author", { name: 1 })
+        // .populate("img", { url: 1 })
+        // .populate("location", { centerName: 1 });
+        console.log(data);
+        res.status(200).json({ data });
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 router.post("/newentry", async (req, res) => {
     try {
         const createdEntry = await Portfolio.create(req.body);

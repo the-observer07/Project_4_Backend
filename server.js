@@ -32,38 +32,38 @@ app.get("/", (req, res) => {
 ////////////////////////
 ///  USER RELATED   ///
 //////////////////////
-app.post("/newuser", (req, res) => {
-    res.json("New User Created");
-});
+// app.post("/newuser", (req, res) => {
+//     res.json("New User Created");
+// });
 
-app.post("/login", (req, res) => {
-    res.json("Login successful");
-});
+// app.post("/login", (req, res) => {
+//     res.json("Login successful");
+// });
 
 /////////////////////////////
 ///  WATCHLIST RELATED   ///
 ///////////////////////////
 
-app.post("/newwatch", (req, res) => {
-    res.json("Added successfully");
-});
+// app.post("/newwatch", (req, res) => {
+//     res.json("Added successfully");
+// });
 
-app.delete("/removewatch", (req, res) => {
-    res.json("Removed successfully");
-});
+// app.delete("/removewatch", (req, res) => {
+//     res.json("Removed successfully");
+// });
 
 /////////////////////////////
 ///  PORTFOLIO RELATED   ///
 ///////////////////////////
 
-app.post("/newentry", (req, res) => {
-    res.json("New entry created");
-});
+// app.post("/newentry", (req, res) => {
+//     res.json("New entry created");
+// });
 
-app.patch("/entryupdate", (req, res) => {
-    res.json("Entry updated");
-});
+// app.patch("/entryupdate", (req, res) => {
+//     res.json("Entry updated");
+// });
 
-app.delete("/removeentry", (req, res) => {
-    res.json("Entry deleted");
-});
+// app.delete("/removeentry", (req, res) => {
+//     res.json("Entry deleted");
+// });
