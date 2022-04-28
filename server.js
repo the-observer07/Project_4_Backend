@@ -5,11 +5,14 @@ require("dotenv").config();
 const user = require("./routes/user");
 const portfolio = require("./routes/portfolio");
 const watchlist = require("./routes/watchlist");
+var cors = require("cors");
 
 connectDB(process.env.MONGODB_URI);
 
 console.log(process.env.PORT);
 const port = process.env.PORT;
+
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

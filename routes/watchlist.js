@@ -4,6 +4,7 @@ const router = express.Router();
 
 router.post("/newwatch", async (req, res) => {
     try {
+        console.log(req.body);
         const createdWatch = await Watchlist.create(req.body);
         console.log("Added to watchlist", createdWatch);
         res.json({ status: "ok", message: "Added to watchlist" });

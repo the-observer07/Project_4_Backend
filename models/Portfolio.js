@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const portfolioSchema = new Schema(
     {
-        token: {
+        id: {
             type: String,
             required: [true, "Token is required."],
         },
