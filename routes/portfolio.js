@@ -28,19 +28,22 @@ router.post("/newentry", async (req, res) => {
     }
 });
 
-router.patch("/entryupdate", async (req, res) => {
+router.post("/entryupdate", async (req, res) => {
     try {
+        console.log(req.body);
         const editedEntry = await Portfolio.findOne(req.body);
-        console.log(editedEntry);
-        res.json({ status: "ok", message: "entry edited" });
+        console.log(editedEntry); // push to front end
+        res.status(200).json({ editedEntry });
+        // console.log(editedEntry);
+        // res.json({ status: "ok", message: "entry edited" });
     } catch (error) {
         console.log(error);
     }
 });
 
 router.post("/removeentry", async (req, res) => {
-    // const deleteEntry = await Portfolio.deleteOne(req.body);
-    console.log(JSON.stringify(req.body));
+    console.log(req.body);
+    const deleteEntry = await Portfolio.deleteOne(req.body);
     // const { token } = req.body;
     // const message = await Portfolio.deleteOne({ token });
 
