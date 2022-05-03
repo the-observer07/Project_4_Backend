@@ -5,9 +5,20 @@ const router = express.Router();
 router.post("/newwatch", async (req, res) => {
     try {
         console.log(req.body);
+        const check = await Watchlist.find(req.body); // if no similar proceed to create // if similar ?
         const createdWatch = await Watchlist.create(req.body);
         console.log("Added to watchlist", createdWatch);
         res.json({ status: "ok", message: "Added to watchlist" });
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+router.get("/getwatch", async (req, res) => {
+    try {
+        const getWatch = await Watchlist.find({});
+        console.log(getWatch);
+        res.status(200).json({ getWatch });
     } catch (error) {
         console.log(error);
     }
