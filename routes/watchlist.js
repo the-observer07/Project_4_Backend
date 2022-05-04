@@ -6,9 +6,13 @@ router.post("/newwatch", async (req, res) => {
     try {
         console.log(req.body);
         const check = await Watchlist.find(req.body); // if no similar proceed to create // if similar ?
-        const createdWatch = await Watchlist.create(req.body);
-        console.log("Added to watchlist", createdWatch);
-        res.json({ status: "ok", message: "Added to watchlist" });
+        if (check === true) {
+            res.json({ status: "error", message: "duplicate" });
+        } else {
+            const createdWatch = await Watchlist.create(req.body);
+            console.log("Added to watchlist", createdWatch);
+            res.json({ status: "ok", message: "Added to watchlist" });
+        }
     } catch (error) {
         console.log(error);
     }
@@ -24,8 +28,9 @@ router.get("/getwatch", async (req, res) => {
     }
 });
 
-router.delete("/removewatch", async (req, res) => {
+router.post("/removewatch", async (req, res) => {
     try {
+        console.log(req.body);
         const { token } = req.body;
         const removedWatch = await Watchlist.deleteOne({ token });
         console.log("Removed from watchlist", removedWatch);

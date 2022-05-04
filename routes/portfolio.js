@@ -41,6 +41,21 @@ router.post("/entryupdate", async (req, res) => {
     }
 });
 
+router.post("/entryupdatesubmit", async (req, res) => {
+    console.log("hello");
+    try {
+        console.log(req.body.body);
+        const findOne = await Portfolio.findOneAndUpdate(req.body.body.token, {
+            token: req.body.body.token,
+            price: req.body.body.price,
+            quantity: req.body.body.quantity,
+        });
+        res.status(200).json({ status: "ok", message: "entry updated" });
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 router.post("/removeentry", async (req, res) => {
     console.log(req.body);
     const deleteEntry = await Portfolio.deleteOne(req.body);

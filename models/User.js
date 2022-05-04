@@ -16,6 +16,34 @@ const userSchema = new Schema(
             type: String,
             required: [true, "Password is required."],
         },
+        watchlist: [
+            {
+                token: {
+                    type: String,
+                    // required: [true],
+                },
+            },
+        ],
+
+        portfolio: [
+            {
+                token: {
+                    type: String,
+                    // required: [true],
+                },
+                price: {
+                    type: Number,
+                    // required: [true],
+                },
+                quantity: {
+                    type: Number,
+                    // required: [true],
+                },
+            },
+        ],
+        loginStatus: {
+            type: Boolean,
+        },
     },
     { timestamps: true }
 );
