@@ -6,6 +6,7 @@ const user = require("./routes/user");
 const portfolio = require("./routes/portfolio");
 const watchlist = require("./routes/watchlist");
 var cors = require("cors");
+const externalAPI = require("./routes/coingeckoAPI");
 
 connectDB(process.env.MONGODB_URI);
 
@@ -18,8 +19,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/users", user);
-app.use("/portfolio", portfolio);
-app.use("/watchlist", watchlist);
+// app.use("/portfolio", portfolio);
+// app.use("/watchlist", watchlist);
+// app.use("/extAPI", externalAPI);
 
 app.listen(port, () => {
     console.log("I am listening on port", port);
