@@ -4,6 +4,14 @@ const express = require("express");
 const { route } = require("./portfolio");
 const router = express.Router();
 
+//===========================
+//
+// USER
+//
+//===========================
+
+// CREATE NEW USER
+
 router.post("/newuser", async (req, res) => {
     try {
         const checkUser = await User.findOne({ username: req.body.username });
@@ -19,6 +27,8 @@ router.post("/newuser", async (req, res) => {
         res.status(401).json("usernameOrPasswordError");
     }
 });
+
+// LOGIN
 
 router.post("/login", async (req, res) => {
     console.log(req.body);
@@ -39,24 +49,16 @@ router.post("/login", async (req, res) => {
     });
 });
 
-// router.post("/users/status", async (req, res) => {});
-
-// route.post("/login/status", async (req, res) => {
-//     const loginStatus = await User.findOneAndUpdate({
-//         username: username,
-//         loginStatus: req.body,
-//     });
-// });
-
 //===========================
 //
 // PORTFOLIO
 //
 //===========================
 
+// INPUT NEW PORTFOLIO ENTRY
+
 router.post("/portfolio/newentry", async (req, res) => {
     try {
-        console.log(req.body);
         const createdEntry = await User.findOneAndUpdate(
             {
                 username: req.body.username,
@@ -72,42 +74,41 @@ router.post("/portfolio/newentry", async (req, res) => {
             }
         );
         // console.log("portfolio entry recorded", createdEntry);
-        // res.json({ status: "ok", message: "entry created" });
+        res.json({ status: "ok", message: "entry created" });
     } catch (error) {
         console.log(error);
-        // res.status(401).json(usernameOrPasswordError);
+        res.status(401).json(usernameOrPasswordError);
     }
 });
 
+// PULL ALL PORTFOLIO ENTRIES TO SHOW ON TABLE
+
 router.post("/portfolio/pull", async (req, res) => {
     try {
-        // console.log("pullingPortfolio", req.body);
         const data = await User.findOne({
             username: req.body.username,
         });
-
-        // console.log(data);
         res.status(200).json({ data });
     } catch (error) {
         console.log(error);
     }
 });
 
+// MAKING EDITS TO EXISITING PORTFOLIO ENTRIES
+
 router.post("/portfolio/entryupdate", async (req, res) => {
     try {
         console.log(req.body);
         const editedEntry = await User.findOne({
             username: req.body.username,
-            // portfolio: { $elemMatch: { token: req.body.token } },
         });
-        console.log("showingCallForEdit", editedEntry);
         res.status(200).json({ editedEntry }); // push to front end
-        // console.log(editedEntry);
-        // res.json({ status: "ok", message: "entry edited" });
     } catch (error) {
         console.log(error);
     }
 });
+
+// SUBMITTING EDITED ENTRIES
 
 router.post("/portfolio/entryupdatesubmit", async (req, res) => {
     // console.log("hello");
@@ -132,9 +133,10 @@ router.post("/portfolio/entryupdatesubmit", async (req, res) => {
     }
 });
 
+// DELETING PORTFOLIO ENTRY
+
 router.post("/portfolio/removeentry", async (req, res) => {
     console.log(req.body);
-    // const deleteEntry = await Portfolio.findOneAndDelete(req.body);
     try {
         const removePorfolio = await User.findOneAndUpdate(
             { username: req.body.username },
@@ -142,27 +144,10 @@ router.post("/portfolio/removeentry", async (req, res) => {
         );
         res.json({ status: "ok", message: "entry deleted" });
         console.log(removePorfolio);
-        // const { token } = req.body;
-        // const message = await Portfolio.deleteOne({ token });
-
-        // if (message.deletedCount === 1) {
     } catch {
         res.json({ status: "error", message: "problems with deleting entry" });
     }
 });
-
-// router.post("/newentry", async (req, res) => {
-//     try {
-//         const createdEntry = await Portfolio.create(req.body);
-//         console.log("portfolio entry recorded", createdEntry);
-//         res.json({ status: "ok", message: "entry created" });
-//     } catch (error) {
-//         console.log(error);
-//         // res.status(401).json(usernameOrPasswordError);
-//     }
-// });
-
-// router.get("/logout", catchAsync(userflow.logout));
 
 //===========================
 //
@@ -178,6 +163,16 @@ router.post("/watchlist/newwatch", async (req, res) => {
         const createdWatch = await User.findOneAndUpdate(
             { username: req.body.username },
             { $push: { watchlist: req.body.token } }
+            // const createdWatch = await User.find({
+            //     username: req.body.username,
+            //     watchlist: req.body.token,
+            // });
+
+            // res.json({
+            //     tokenExists: true,
+            //     message: "token has been added to watchlist",
+            // });
+            // console.log(createdWatch);
         ); // if no similar proceed to create // if similar ?
         // if (check === true) {
         //     res.json({ status: "error", message: "duplicate" });
